@@ -1,1 +1,1 @@
-rootProject.name = "players-api"
+rootProject.name = "fr.betclic.players-api"
