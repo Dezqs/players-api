@@ -16,9 +16,8 @@ fun Application.playerRoutes(){
                 call.respondText("Return sorted collection of players")
             }
 
-            get("/{id}"){
-                val playerId = call.parameters["id"]
-                call.respond(playerService.getDefaultPlayer().pseudo)
+            get("/{pseudo}"){
+                call.respond(playerService.getPlayerByPseudo(call.parameters["pseudo"].orEmpty()))
             }
 
         }
