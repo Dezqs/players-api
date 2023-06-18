@@ -7,13 +7,14 @@ import org.litote.kmongo.eq
 import org.litote.kmongo.findOne
 import org.litote.kmongo.getCollection
 
-class PlayerRepository(client: MongoClient) : RepositoryInterface<Player>{
+class PlayerRepository(client: MongoClient) : RepositoryInterface<Player> {
 
     override lateinit var col: MongoCollection<Player>
 
     init {
         val database = client.getDatabase("playerDB")
         col = database.getCollection<Player>("Player")
+
     }
 
     override fun getById(id: String): Player {

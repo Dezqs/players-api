@@ -1,14 +1,13 @@
 package fr.betclic.domain.player
 
-import fr.betclic.domain.tournament.Tournament
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
-import org.litote.kmongo.*
+import org.litote.kmongo.Id
 
 @Serializable
 data class Player(
     @Contextual val id: Id<Player>,
     val pseudo: String,
-    val tournament: Tournament,
+    val tournamentName: String,
     val points: Int
 )
