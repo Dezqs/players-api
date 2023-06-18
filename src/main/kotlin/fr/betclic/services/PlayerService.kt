@@ -11,8 +11,21 @@ class PlayerService : KoinComponent {
     private val client: MongoClient by inject()
     private val playerRepository: PlayerRepository = PlayerRepository(client)
 
-    fun getPlayerByPseudo(pseudo: String) : Player{
+    fun getPlayerByPseudo(pseudo: String): Player {
         return playerRepository.findUser("pseudo") ?: error("Can't find $pseudo user")
+    }
+
+    fun getAllPlayers(): List<Player> {
+        return playerRepository.getAll()
+    }
+
+    fun deleteUser(pseudo: String): Boolean {
+        return playerRepository.deleteByPseudo(pseudo)
+    }
+
+    //TODO : improve process to avoid duplication ??? Or everything (new game) will be a "player"
+    fun addPlayer(player: Player) : Player{
+        return playerRepository.add(player)
     }
 
 }

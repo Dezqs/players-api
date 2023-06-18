@@ -1,19 +1,33 @@
 package fr.betclic.routes
 
+import fr.betclic.services.PlayerService
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.koin.ktor.ext.inject
 
 fun Application.adminRoutes(){
+
+    val playerService : PlayerService by inject()
+
     routing {
         route("/admin"){
-            ping()
-        }
-    }
-}
 
-fun Route.ping(){
-    get("/ping"){
-        call.respondText("ALL_OK")
+            get("/ping"){
+                call.respondText("ALL_OK")
+            }
+
+            delete("/player/{pseudo}"){
+                try {
+                    if(playerService.deleteUser(call.parameters["pseudo"].orEmpty())){
+                        call.respond(HttpStatusCode.Accepted)
+                    }else
+                        call.respond(HttpStatusCode.NoContent)
+                }catch (e: Exception){
+                    throw e
+                }
+            }
+        }
     }
 }

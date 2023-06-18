@@ -25,13 +25,22 @@ class PlayerRepository(client: MongoClient) : RepositoryInterface<Player> {
         TODO("Not yet implemented")
     }
 
+    fun deleteByPseudo(pseudo: String): Boolean {
+        return try {
+            col.deleteOne(Player::pseudo eq pseudo).deletedCount > 0
+        }catch (e: Exception){
+            throw Exception("Unable to delete the player $pseudo", e )
+        }
+    }
+
     override fun update(entry: Player): Player {
         TODO("Not yet implemented")
     }
 
     fun findUser(pseudo: String): Player? {
-        return try {
-            col.findOne(Player::pseudo eq pseudo) ?: throw Exception("No item with that ID exists")
+        return try { //Fixme -> Seems to doesn't work
+            col.findOne(Player::pseudo eq pseudo) ?:
+            throw Exception("No player with that pseudo exists")
         } catch (t: Throwable) {
             throw Exception("Cannot get item")
         }
