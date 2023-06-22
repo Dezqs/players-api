@@ -3,8 +3,11 @@ package fr.betclic
 import fr.betclic.domain.dbModule
 import fr.betclic.plugins.configureSerialization
 import fr.betclic.routes.adminRoutes
+import fr.betclic.routes.gameRoutes
 import fr.betclic.routes.playerRoutes
+import fr.betclic.services.GameService
 import fr.betclic.services.PlayerService
+import fr.betclic.services.TournamentService
 import io.ktor.server.application.*
 import org.koin.dsl.module
 import org.koin.ktor.plugin.Koin
@@ -23,6 +26,7 @@ fun Application.main() {
 
         adminRoutes()
         playerRoutes()
+        gameRoutes()
 
         modules(dbModule,services)
 
@@ -31,4 +35,6 @@ fun Application.main() {
 
 val services = module {
     single { PlayerService() }
+    single { GameService() }
+    single { TournamentService() }
 }

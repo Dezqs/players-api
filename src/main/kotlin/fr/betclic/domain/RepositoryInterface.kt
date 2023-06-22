@@ -6,8 +6,6 @@ interface RepositoryInterface<T> {
 
     var col: MongoCollection<T>
 
-    fun getById(id: String): T
-
     fun getAll(): List<T> {
         return try {
             val res = col.find()
@@ -16,8 +14,6 @@ interface RepositoryInterface<T> {
             throw Exception("Cannot get all items")
         }
     }
-
-    fun delete(id: String): Boolean
 
     fun add(entry: T): T {
         return try {

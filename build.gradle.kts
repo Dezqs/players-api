@@ -37,7 +37,8 @@ dependencies {
 
     implementation("ch.qos.logback:logback-classic:$logback_version")
 
-    implementation("org.litote.kmongo:kmongo-serialization:4.9.0")
+    implementation("org.litote.kmongo:kmongo:4.9.0")
+    implementation("org.litote.kmongo:kmongo-id-jackson:4.9.0")
 
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
