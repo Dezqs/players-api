@@ -1,7 +1,6 @@
 package fr.betclic.routes
 
 import fr.betclic.domain.dto.GameDTO
-import fr.betclic.domain.dto.toGame
 import fr.betclic.services.GameService
 import io.ktor.http.*
 import io.ktor.server.application.*

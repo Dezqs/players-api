@@ -7,6 +7,6 @@ data class Game(
     @BsonId
     val id: Id<Game>? = null,
     val pseudo: String,
-    val tournament: String,
+    val tournament: String?,
     val points: Int
 )

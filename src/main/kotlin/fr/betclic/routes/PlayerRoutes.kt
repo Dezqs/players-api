@@ -1,8 +1,9 @@
 package fr.betclic.routes
 
-import fr.betclic.domain.dto.GameDTO
-import fr.betclic.domain.dto.toGame
+import fr.betclic.domain.dto.InPlayerDTO
+import fr.betclic.domain.dto.OutPlayerDTO
 import fr.betclic.services.PlayerService
+import fr.betclic.services.TournamentService
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -14,6 +15,7 @@ fun Application.playerRoutes() {
     routing {
 
         val playerService: PlayerService by inject()
+        val tournamentService: TournamentService by inject()
 
         route("/player") {
             get("/all") {
@@ -25,6 +27,23 @@ fun Application.playerRoutes() {
                     call.respond(playerService.getPlayerByPseudo(call.parameters["pseudo"].orEmpty()))
                 } catch (e: Exception) {
                     call.respond(HttpStatusCode.NoContent, "No user matches your criteria")
+                }
+            }
+
+            post("/update") {
+                return@post try {
+                    val playerToUpdate = call.receive<InPlayerDTO>()
+                    if (tournamentService.updatePlayerPointsInTournament(
+                            playerToUpdate.playerPseudo,
+                            playerToUpdate.tournament,
+                            playerToUpdate.points
+                        )
+                    ) {
+                        call.respond(HttpStatusCode.Accepted)
+                    } else
+                        call.respond(HttpStatusCode.NoContent, "No user matches your criteria")
+                } catch (t: Throwable) {
+                    throw t
                 }
             }
         }
