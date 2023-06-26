@@ -24,15 +24,11 @@ class GameRepository(client: MongoClient) : RepositoryInterface<Game> {
         }
     }
 
-    override fun update(entry: Game): Game {
-        TODO("Not yet implemented")
-    }
-
     /**
      * Doesn't work for now but it's a proper way to aggregate data
      */
     fun aggregateGamesByUser(pseudo: String): List<Game>? {
-         return try {
+        return try {
             col.aggregate<Game>(
                 match(Game::pseudo eq pseudo),
                 project(
@@ -55,7 +51,16 @@ class GameRepository(client: MongoClient) : RepositoryInterface<Game> {
     fun findGamesByUser(pseudo: String): List<Game> {
         return try {
             col.find(Game::pseudo eq pseudo).toList()
-        }catch (t: Throwable) {
+        } catch (t: Throwable) {
+            throw Exception("Cannot get item", t)
+
+        }
+    }
+
+    fun findGamesByTournament(tournament: String): List<Game> {
+        return try {
+            col.find(Game::tournament eq tournament).toList()
+        } catch (t: Throwable) {
             throw Exception("Cannot get item", t)
 
         }

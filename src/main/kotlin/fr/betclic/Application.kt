@@ -5,6 +5,7 @@ import fr.betclic.plugins.configureSerialization
 import fr.betclic.routes.adminRoutes
 import fr.betclic.routes.gameRoutes
 import fr.betclic.routes.playerRoutes
+import fr.betclic.routes.tournamentRoutes
 import fr.betclic.services.GameService
 import fr.betclic.services.PlayerService
 import fr.betclic.services.TournamentService
@@ -27,6 +28,7 @@ fun Application.main() {
         adminRoutes()
         playerRoutes()
         gameRoutes()
+        tournamentRoutes()
 
         modules(dbModule,services)
 

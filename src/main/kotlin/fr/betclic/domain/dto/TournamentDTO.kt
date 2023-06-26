@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TournamentDTO (
     val tournamentName: String,
-    val pointsInTournament: Int,
-    val ranking: Int
+    val pseudo : String,
+    val pointsInTournament: Int
 )

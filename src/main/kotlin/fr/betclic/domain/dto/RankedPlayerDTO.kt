@@ -3,7 +3,7 @@ package fr.betclic.domain.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class OutPlayerDTO(
+data class RankedPlayerDTO(
     val pseudo: String,
-    val games: Map<String?, Int>
+    val games: List<RankedTournamentDTO>
 )

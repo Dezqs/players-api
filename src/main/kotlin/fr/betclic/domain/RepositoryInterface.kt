@@ -24,6 +24,4 @@ interface RepositoryInterface<T> {
         }
     }
 
-    fun update(entry: T): T
-
 }

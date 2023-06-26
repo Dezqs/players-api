@@ -1,7 +1,6 @@
 package fr.betclic.routes
 
-import fr.betclic.domain.dto.InPlayerDTO
-import fr.betclic.domain.dto.OutPlayerDTO
+import fr.betclic.domain.dto.PlayerDTO
 import fr.betclic.services.PlayerService
 import fr.betclic.services.TournamentService
 import io.ktor.http.*
@@ -32,7 +31,7 @@ fun Application.playerRoutes() {
 
             post("/update") {
                 return@post try {
-                    val playerToUpdate = call.receive<InPlayerDTO>()
+                    val playerToUpdate = call.receive<PlayerDTO>()
                     if (tournamentService.updatePlayerPointsInTournament(
                             playerToUpdate.playerPseudo,
                             playerToUpdate.tournament,
