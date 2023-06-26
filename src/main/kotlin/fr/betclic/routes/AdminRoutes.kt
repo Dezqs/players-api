@@ -1,5 +1,6 @@
 package fr.betclic.routes
 
+import fr.betclic.domain.dto.ErrorResponse
 import fr.betclic.services.PlayerService
 import fr.betclic.services.TournamentService
 import io.ktor.http.*
@@ -25,9 +26,9 @@ fun Application.adminRoutes(){
                     if(playerService.deleteUser(call.parameters["pseudo"].orEmpty())){
                         call.respond(HttpStatusCode.Accepted)
                     }else
-                        call.respond(HttpStatusCode.NoContent)
+                        call.respond(HttpStatusCode.NoContent, ErrorResponse.PLAYER_NOT_FOUND_RESPONSE)
                 }catch (e: Exception){
-                    throw e
+                    call.respond(HttpStatusCode.InternalServerError, ErrorResponse.SERVER_ERROR_RESPONSE)
                 }
             }
 
@@ -36,9 +37,9 @@ fun Application.adminRoutes(){
                     if(tournamentService.deleteTournament(call.parameters["name"].orEmpty())){
                         call.respond(HttpStatusCode.Accepted)
                     }else
-                        call.respond(HttpStatusCode.NoContent)
+                        call.respond(HttpStatusCode.NoContent, ErrorResponse.TOURNAMENT_NOT_FOUND_RESPONSE)
                 }catch (e: Exception){
-                    throw e
+                    call.respond(HttpStatusCode.InternalServerError, ErrorResponse.SERVER_ERROR_RESPONSE)
                 }
             }
         }

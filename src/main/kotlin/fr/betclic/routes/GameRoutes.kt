@@ -1,5 +1,6 @@
 package fr.betclic.routes
 
+import fr.betclic.domain.dto.ErrorResponse
 import fr.betclic.domain.dto.GameDTO
 import fr.betclic.services.GameService
 import io.ktor.http.*
@@ -16,17 +17,22 @@ fun Application.gameRoutes(){
     routing {
         route("/game"){
             post {
-                return@post try {
+                 try {
                     val gameDTO = call.receive<GameDTO>()
-                    gameService.addGame(gameDTO)
-                    call.respondText("Game stored correctly", status = HttpStatusCode.Created)
+                    gameService.addGame(gameDTO).let {
+                        call.respond(HttpStatusCode.Created,"Game stored correctly")
+                        }
                 } catch (t: Throwable) {
-                    throw t
+                     call.respond(HttpStatusCode.InternalServerError, ErrorResponse.SERVER_ERROR_RESPONSE)
                 }
             }
 
             get("/all") {
-                call.respond(gameService.getAll())
+                return@get try {
+                    call.respond(gameService.getAll())
+                } catch (e: Exception) {
+                    call.respond(HttpStatusCode.NoContent, ErrorResponse.GAME_NOT_FOUND_RESPONSE)
+                }
             }
         }
     }

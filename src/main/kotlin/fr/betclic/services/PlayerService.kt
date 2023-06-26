@@ -8,6 +8,7 @@ import fr.betclic.domain.game.Game
 import fr.betclic.domain.game.GameRepository
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.util.*
 import java.util.stream.Collectors
 import java.util.stream.Collectors.summingInt
 import kotlin.collections.ArrayList
@@ -68,6 +69,7 @@ class PlayerService : KoinComponent {
     fun getAllPlayers(): List<RankedPlayerDTO> {
         val players = ArrayList<RankedPlayerDTO>()
         gameRepository.getAll().stream()
+            .filter(Objects::nonNull)
             .collect(Collectors.groupingBy(Game::pseudo))
             .values.stream().forEach { players.add(enrichPlayerWithTournamentRanking(aggregatePlayerByTournament(it))) }
         return players

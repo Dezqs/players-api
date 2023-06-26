@@ -1,5 +1,6 @@
 package fr.betclic.routes
 
+import fr.betclic.domain.dto.ErrorResponse
 import fr.betclic.domain.dto.PlayerDTO
 import fr.betclic.services.PlayerService
 import fr.betclic.services.TournamentService
@@ -18,14 +19,18 @@ fun Application.playerRoutes() {
 
         route("/player") {
             get("/all") {
-                call.respond(playerService.getAllPlayers())
+                return@get try {
+                    call.respond(playerService.getAllPlayers())
+                } catch (e: Exception) {
+                    call.respond(HttpStatusCode.NoContent, ErrorResponse.PLAYER_NOT_FOUND_RESPONSE)
+                }
             }
 
             get("/{pseudo}") {
                 return@get try {
                     call.respond(playerService.getPlayerByPseudo(call.parameters["pseudo"].orEmpty()))
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.NoContent, "No user matches your criteria")
+                    call.respond(HttpStatusCode.NoContent, ErrorResponse.PLAYER_NOT_FOUND_RESPONSE)
                 }
             }
 
@@ -42,7 +47,7 @@ fun Application.playerRoutes() {
                     } else
                         call.respond(HttpStatusCode.NoContent, "No user matches your criteria")
                 } catch (t: Throwable) {
-                    throw t
+                    call.respond(HttpStatusCode.InternalServerError, ErrorResponse.SERVER_ERROR_RESPONSE)
                 }
             }
         }
