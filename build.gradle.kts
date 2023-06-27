@@ -36,10 +36,16 @@ dependencies {
     implementation("io.insert-koin:koin-logger-slf4j:$koin_ktor")
 
     implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("io.ktor:ktor-server-cors:$ktor_version")
 
     implementation("org.litote.kmongo:kmongo:4.9.0")
     implementation("org.litote.kmongo:kmongo-id-jackson:4.9.0")
 
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
+    testImplementation("io.insert-koin:koin-test:$koin_ktor")
+    testImplementation("io.insert-koin:koin-test-junit5:$koin_ktor")
+    testImplementation("org.mockito:mockito-core:5.4.0")
+    testImplementation("io.mockk:mockk:1.13.4")
+
 }
