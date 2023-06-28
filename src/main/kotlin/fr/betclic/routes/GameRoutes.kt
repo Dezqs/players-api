@@ -20,7 +20,7 @@ fun Application.gameRoutes(){
                  try {
                     val gameDTO = call.receive<GameDTO>()
                     gameService.addGame(gameDTO).let {
-                        call.respond(HttpStatusCode.Created,"Game stored correctly")
+                        call.respond(HttpStatusCode.Created)
                         }
                 } catch (t: Throwable) {
                      call.respond(HttpStatusCode.InternalServerError, ErrorResponse.SERVER_ERROR_RESPONSE)

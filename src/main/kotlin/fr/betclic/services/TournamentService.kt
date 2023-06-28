@@ -29,7 +29,7 @@ class TournamentService : KoinComponent {
 
     fun getTournamentPlayersOrderedByPoints(tournamentName: String) : List<TournamentDTO>{
 
-        var tournamentRanking = mutableListOf<TournamentDTO>()
+        val tournamentRanking = mutableListOf<TournamentDTO>()
         gameRepository.findGamesByTournament(tournamentName)
             .stream()
             .filter{ tournamentName.isNotBlank() }
