@@ -8,5 +8,6 @@ fun Application.configureCors() {
     install(CORS) {
         anyHost()
         allowHeader(HttpHeaders.ContentType)
+        HttpMethod.DefaultMethods.forEach { allowMethod(it) }
     }
 }
