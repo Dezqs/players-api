@@ -33,20 +33,18 @@ class PlayerService : KoinComponent {
         player.games.keys.forEach { tournament ->
             if (!tournament.isNullOrEmpty()) {
                 val playersRanked = tournamentService.getTournamentPlayersOrderedByPoints(tournament)
-                var ranking = 0
-                val tournamentItem = playersRanked.stream()
+                val tournamentItem = playersRanked.players.stream()
                     .filter { it.pseudo == player.pseudo }
                     .findFirst()
-                if (tournamentItem.isPresent) {
-                    ranking = playersRanked.indexOf(tournamentItem.get()) + 1
-                }
-                listRankedTournamentDTO.add(
-                    RankedTournamentDTO(
-                        tournament,
-                        ranking,
-                        player.games.getOrDefault(tournament, 0)
+                if(tournamentItem.isPresent){
+                    listRankedTournamentDTO.add(
+                        RankedTournamentDTO(
+                            tournament,
+                            tournamentItem.get().ranking,
+                            tournamentItem.get().pointsInTournament
+                        )
                     )
-                )
+                }
             }
         }
         return RankedPlayerDTO(player.pseudo, listRankedTournamentDTO)

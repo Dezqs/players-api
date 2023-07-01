@@ -24,6 +24,13 @@ fun Application.tournamentRoutes() {
                     call.respond(HttpStatusCode.NoContent, ErrorResponse.TOURNAMENT_NOT_FOUND_RESPONSE)
                 }
             }
+            get("/all"){
+                return@get try {
+                    call.respond(tournamentService.getAllTournament())
+                } catch (e: Exception) {
+                    call.respond(HttpStatusCode.InternalServerError, ErrorResponse.SERVER_ERROR_RESPONSE)
+                }
+            }
         }
     }
 }
