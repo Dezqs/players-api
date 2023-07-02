@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "1946ddbc-4ad9-467f-9e73-6f3553924e9e",
+		"name": "PLAYERS-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ADMIN",
+			"item": [
+				{
+					"name": "PING",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{players-api}}/admin/ping",
+							"host": [
+								"{{players-api}}"
+							],
+							"path": [
+								"admin",
+								"ping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE PLAYER",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{players-api}}/admin/player/:pseudo",
+							"host": [
+								"{{players-api}}"
+							],
+							"path": [
+								"admin",
+								"player",
+								":pseudo"
+							],
+							"variable": [
+								{
+									"key": "pseudo",
+									"value": "toto"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE TOURNAMENT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{players-api}}/admin/tournament/:name",
+							"host": [
+								"{{players-api}}"
+							],
+							"path": [
+								"admin",
+								"tournament",
+								":name"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PLAYER",
+			"item": [
+				{
+					"name": "UPDATE PLAYER POINTS IN TOURNAMENT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"playerPseudo\": \"player4\",\n    \"tournament\": \"tournament1\",\n    \"points\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{players-api}}/player/update",
+							"host": [
+								"{{players-api}}"
+							],
+							"path": [
+								"player",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{players-api}}/player/all",
+							"host": [
+								"{{players-api}}"
+							],
+							"path": [
+								"player",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PLAYER BY PSEUDO",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{players-api}}/player/:pseudo",
+							"host": [
+								"{{players-api}}"
+							],
+							"path": [
+								"player",
+								":pseudo"
+							],
+							"variable": [
+								{
+									"key": "pseudo",
+									"value": "player1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GAME",
+			"item": [
+				{
+					"name": "ADD NEW GAME",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"playerPseudo\": \"player4\",\n    \"tournament\": \"tournament1\",\n    \"points\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{players-api}}/game",
+							"host": [
+								"{{players-api}}"
+							],
+							"path": [
+								"game"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{players-api}}/game/all",
+							"host": [
+								"{{players-api}}"
+							],
+							"path": [
+								"game",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TOURNAMENT",
+			"item": [
+				{
+					"name": "GET TOURNAMENT RANKING",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{players-api}}/tournament/:tournamentName",
+							"host": [
+								"{{players-api}}"
+							],
+							"path": [
+								"tournament",
+								":tournamentName"
+							],
+							"variable": [
+								{
+									"key": "tournamentName",
+									"value": "tournament1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{players-api}}/tournament/all",
+							"host": [
+								"{{players-api}}"
+							],
+							"path": [
+								"tournament",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -43,9 +43,21 @@ dependencies {
 
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
-    testImplementation("io.insert-koin:koin-test:$koin_ktor")
     testImplementation("io.insert-koin:koin-test-junit5:$koin_ktor")
-    testImplementation("org.mockito:mockito-core:5.4.0")
     testImplementation("io.mockk:mockk:1.13.4")
 
+}
+
+tasks {
+    test {
+        useJUnitPlatform()
+        testLogging {
+            events("passed", "skipped", "failed")
+        }
+    }
+
+    // config JVM target to 1.8 for kotlin compilation tasks
+    compileKotlin {
+        kotlinOptions.jvmTarget = "11"
+    }
 }
