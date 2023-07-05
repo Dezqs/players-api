@@ -9,13 +9,17 @@ import fr.betclic.domain.game.GameRepository
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class GameService : KoinComponent {
+class GameService() : KoinComponent {
 
     private val client: MongoClient by inject()
-    private val gameRepository: GameRepository = GameRepository(client)
+    private var gameRepository: GameRepository = GameRepository(client)
 
-    fun addGame(gameToAdd: GameDTO): Game {
-        return gameRepository.add(gameToAdd.toGame())
+    constructor(gameRepository: GameRepository) : this() {
+        this.gameRepository = gameRepository
+    }
+
+    fun addGame(gameToAdd: GameDTO): GameDTO {
+        return gameRepository.add(gameToAdd.toGame()).toGameDTO()
     }
 
     fun getAll(): List<GameDTO> {
